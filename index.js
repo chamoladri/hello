@@ -1,27 +1,39 @@
 var express = require("express");
 var http  = require("http");
+var five = require("johnny-five");
 var app = express();
+var led;
 
-var status = false;
 //sirvce el contenido estatico 
 //en la carpeta static
 app.use(express.static("static/"));
 
-//rutas
+var sayhello = function(){
+	console.log("hello panobot");
+}
 
+//rutas
 app.get('/start', function(req, res){
-	console.log("iniciando proceso");
-	//var respuesta = {"res":"ok"};
-	var dato = {'status':'stopped'};
-	status = !status;
+	sayhello();
 	res.contentType('json');
-	if(status){
-		dato = {'status':'running'};
-	}else{
-		dato = {'status':'stopped'};
-	}
-	res.send(dato);
+	led.on();
+	res.send({'status':'running'});
 });
 
-//inicia el server y escucha por el 3000
-http.createServer(app).listen(3000);
+
+app.get('/mauro', function(req, res){
+	console.log("iniciando proceso led");
+	res.contentType('json');
+	led.off();
+	res.send({'status':'stopped'});
+});
+
+board = new five.Board();
+
+board.on("ready", function(){
+	led = new five.Led({
+		pin: 13
+	});
+	//inicia el server y escucha por el 3000
+	http.createServer(app).listen(3000);
+});

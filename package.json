@@ -9,6 +9,7 @@
   "author": "mauro",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.3.1"
+    "express": "^4.3.1",
+    "johnny-five": "^0.7.46"
   }
 }
