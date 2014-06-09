@@ -34,4 +34,25 @@ $(document).ready(function(){
 		})
 	});
 
+	$("#lista").click(function(){
+		console.log("dropdow!!");
+
+		//peticion ajax por get
+		$.ajax({
+			url:"/lista",
+			dataType:"json",
+			success:function(data ){
+				//si obtenemos respuesta
+				console.log("recibimos data" + JSON.stringify(data));
+				//seleccionamos el elemento y inyectamos html
+				
+				
+			}
+		})
+	});
+
+
+
+
 });
+
